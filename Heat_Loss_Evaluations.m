@@ -9,7 +9,7 @@ set(fig, 'Position', [100, 100, 800, 600]);  % Set figure position and size
 clf;
 
 % ------ User Parameters Editing Start ------
-Tend_Temperature_Target = 300; % C
+Tend_Temperature_Target = 220; % C
 Tamb_Temperature = 20; % C
 T0_Temperature = Tamb_Temperature;
 Distance = 1; % m
@@ -45,7 +45,7 @@ k = 0.0257;       % Thermal conductivity (W/(m·K))
 Pr = 0.713;       % Prandtl number
 
 % Different gauges to simulate
-gauges = 18:30;
+gauges = 20:34;
 
 % Initialize arrays to store results
 num_steps = Simulation_Duration / Simulation_Step_Size;
@@ -176,3 +176,5 @@ legend(arrayfun(@(x) sprintf('Gauge %d', x), gauges, 'UniformOutput', false), 'L
 % Adjust the layout
 sgtitle('Nichrome Wire Heating Simulation for Different Gauges', 'FontSize', 16);
 set(gcf, 'Color', 'w');  % Set background color to white
+
+
