@@ -1,4 +1,0 @@
-devSim cnc Foam
-
-https://www.devcad.com/eng/devsimcncfoam.asp
-https://www.devcad.com/eng/download.asp
