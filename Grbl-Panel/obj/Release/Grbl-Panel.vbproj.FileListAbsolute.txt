@@ -1,0 +1,24 @@
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\Grbl HotWire Controller.exe.config
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\CHANGES.txt
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\CREDITS.txt
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\LICENSE.txt
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\LICENSE.rtf
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\README
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\Grbl HotWire Controller.exe
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\Grbl HotWire Controller.pdb
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\Grbl HotWire Controller.xml
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\fr\Grbl HotWire Controller.resources.dll
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\RepeatButton.dll
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\RepeatButton.pdb
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\bin\Release\RepeatButton.xml
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\obj\Release\Grbl-Panel.vbprojResolveAssemblyReference.cache
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\obj\Release\GrblPanel.AboutBox.resources
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\obj\Release\GrblPanel.GrblGui.resources
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\obj\Release\GrblPanel.Resources.resources
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\obj\Release\GrblPanel.GrblGui.fr.resources
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\obj\Release\GrblPanel.Resources.fr.resources
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\obj\Release\Grbl-Panel.vbproj.GenerateResource.Cache
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\obj\Release\fr\Grbl HotWire Controller.resources.dll
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\obj\Release\Grbl HotWire Controller.exe
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\obj\Release\Grbl HotWire Controller.xml
+C:\Users\Rascio\Desktop\Grbl-Panel-master\Grbl-Panel\obj\Release\Grbl HotWire Controller.pdb
