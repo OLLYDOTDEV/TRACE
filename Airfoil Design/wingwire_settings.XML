@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Stored HotWireCNC Data</comment>
+<entry key="Sweep">30</entry>
+<entry key="Base Thickness">8</entry>
+<entry key="Kerf Tip">1.4</entry>
+<entry key="yClearance">25</entry>
+<entry key="Right Horizontal Axis Name">U</entry>
+<entry key="Z Shift">50</entry>
+<entry key="pathExport">C:\Users\obell\Documents\GitHub\TRACE\Airfoil Design</entry>
+<entry key="Distribution Coefficient">1.5</entry>
+<entry key="Cutting Points">500</entry>
+<entry key="Kerf Root">0.8</entry>
+<entry key="Leading Edge Offset">1</entry>
+<entry key="Offset Outside Block">20</entry>
+<entry key="X Shift">50</entry>
+<entry key="Tip Input File Path">ag11.dat</entry>
+<entry key="X Shift Block">40</entry>
+<entry key="Root Input File Path">ag10.dat</entry>
+<entry key="Root">140</entry>
+<entry key="Alpha Root">0</entry>
+<entry key="Left Horizontal Axis Name">X</entry>
+<entry key="pathTip">C:\Users\obell\Documents\GitHub\TRACE\Airfoil Design\coord_seligFmt\ag11.dat</entry>
+<entry key="Hingeline Percentage">0</entry>
+<entry key="Left Vertical Axis Name">Y</entry>
+<entry key="Right Vertical Axis Name">Z</entry>
+<entry key="Alpha Tip">0</entry>
+<entry key="Cutting Speed">180</entry>
+<entry key="pathRoot">C:\Users\obell\Documents\GitHub\TRACE\Airfoil Design\coord_seligFmt\ag10.dat</entry>
+<entry key="Block Length">150</entry>
+<entry key="Centerline">20</entry>
+<entry key="Horizontal Movement Speed">4000</entry>
+<entry key="Horizontal Axis Length">300</entry>
+<entry key="Trailing Edge Offset">10</entry>
+<entry key="Tip">100</entry>
+<entry key="Vertical Movement Speed">800</entry>
+<entry key="Wirelength">450</entry>
+<entry key="Wingspan">200</entry>
+<entry key="Foam Thickness">40</entry>
+</properties>
