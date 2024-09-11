@@ -20,12 +20,12 @@
 #ifdef DEFAULTS_FOAMCUTTER
   //  step_per_revolution = number of motor steps per revolution
   #define USER_STEP_PER_REVOLUTION        200
-  #define USER_MICROSTEPS                 16
+  #define USER_MICROSTEPS                 32
   #define USER_PITCH_BELT                 2     // in mm
   #define USER_GEAR                       20    // No of Teeth
   
   ///  pitch_screw = pitch of screw
-  #define USER_PITCH_SCREW                4  // 4mm for all linear axes
+  #define USER_PITCH_SCREW                1  // 1mm for all linear axes
   #define USER_STEP_MM                    (USER_STEP_PER_REVOLUTION/USER_PITCH_SCREW)
   ///  ratio_table  =  the worm gear ratio
   #define USER_RATIO_TABLE                90   // for rotary axis
@@ -34,11 +34,11 @@
   #define USER_TABLE                      ((USER_RATIO_TABLE*USER_STEP_PER_REVOLUTION)/360.0)
 //==============================================================================
   
-  #define DEFAULT_X_STEPS_PER_MM          ((USER_STEP_PER_REVOLUTION * USER_MICROSTEPS) / (USER_PITCH_BELT * USER_GEAR))
-  #define DEFAULT_Y_STEPS_PER_MM          ((USER_STEP_PER_REVOLUTION * USER_MICROSTEPS) / (USER_PITCH_BELT * USER_GEAR))
+  #define DEFAULT_X_STEPS_PER_MM          ((USER_STEP_PER_REVOLUTION * USER_MICROSTEPS) / (USER_PITCH_SCREW)) // configed for scew as driving 
+  #define DEFAULT_Y_STEPS_PER_MM          ((USER_STEP_PER_REVOLUTION * USER_MICROSTEPS) / (USER_PITCH_SCREW))
   
-  #define DEFAULT_U_STEPS_PER_MM          ((USER_STEP_PER_REVOLUTION * USER_MICROSTEPS) / (USER_PITCH_BELT * USER_GEAR))
-  #define DEFAULT_Z_STEPS_PER_MM          ((USER_STEP_PER_REVOLUTION * USER_MICROSTEPS) / (USER_PITCH_BELT * USER_GEAR))
+  #define DEFAULT_U_STEPS_PER_MM          ((USER_STEP_PER_REVOLUTION * USER_MICROSTEPS) / (USER_PITCH_SCREW))
+  #define DEFAULT_Z_STEPS_PER_MM          ((USER_STEP_PER_REVOLUTION * USER_MICROSTEPS) / (USER_PITCH_SCREW))
  
   #define DEFAULT_STEP_PULSE_MICROSECONDS 10
   #define DEFAULT_MM_PER_ARC_SEGMENT      0.1
