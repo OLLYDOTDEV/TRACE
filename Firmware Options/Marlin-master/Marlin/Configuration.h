@@ -510,7 +510,7 @@
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  *
  */
-#define TEMP_SENSOR_0 0
+#define TEMP_SENSOR_0 -2
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -979,7 +979,7 @@
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 1066, 1066, 1066, 1066 ,1066}
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 1066, 1066, 1066, 1066 ,1066}
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 6400, 6400, 6400, 6400 ,6400}
 
 /**
  * Default Max Feed Rate (mm/s for linear axes, °/s for rotational axes)
