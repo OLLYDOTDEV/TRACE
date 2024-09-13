@@ -1,11 +1,8 @@
 /*==============================================================================
-  Marlin2ForPipetBot [https://github.com/DerAndere1/Marlin]
-  Copyright 2019 - 2022 DerAndere and other Marlin2ForPipetBot authors [https://github.com/DerAndere1/Marlin]
 
-  Based on:
   Marlin Firmware
 
-  (c) 2011-2020 MarlinFirmware
+  (c) 2011-2024 MarlinFirmware
   Portions of Marlin are (c) by their respective authors.
   All code complies with GPLv2 and/or GPLv3
 
@@ -30,7 +27,7 @@ Configuration
   - https://github.com/MarlinFirmware/Configurations
     Example configurations for several printer models.
 
-  - https://www.youtube.com/watch?v=3gwWVFtdg-4
+  - https://youtu.be/3gwWVFtdg-4
     A good 20-minute overview of Marlin configuration by Tom Sanladerer.
     (Applies to Marlin 1.0.x, so Jerk and Acceleration should be halved.)
     Also... https://www.google.com/search?tbs=vid%3A1&q=configure+marlin

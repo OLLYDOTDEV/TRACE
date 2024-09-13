@@ -1,8 +1,4 @@
 /**
- * Marlin2ForPipetBot [https://github.com/DerAndere1/Marlin]
- * Copyright 2019 - 2022 DerAndere and other Marlin2ForPipetBot authors [https://github.com/DerAndere1/Marlin]
- *
- * Based on:
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
@@ -32,7 +28,7 @@
 /**
  * Marlin release version identifier
  */
-//#define SHORT_BUILD_VERSION "bugfix-2.0.x"
+//#define SHORT_BUILD_VERSION "bugfix-2.1.x"
 
 /**
  * Verbose version identifier which should contain a reference to the location
@@ -45,7 +41,7 @@
  * here we define this default string as the date where the latest release
  * version was tagged.
  */
-//#define STRING_DISTRIBUTION_DATE "2022-01-17"
+//#define STRING_DISTRIBUTION_DATE "2024-09-13"
 
 /**
  * Defines a generic printer name to be output to the LCD after booting Marlin.

@@ -1,8 +1,4 @@
 /**
- * Marlin2ForPipetBot [https://github.com/DerAndere1/Marlin]
- * Copyright 2019 - 2022 DerAndere and other Marlin2ForPipetBot authors [https://github.com/DerAndere1/Marlin]
- *
- * Based on:
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
@@ -43,7 +39,7 @@ void GcodeSuite::G29() {
 
   TERN_(FULL_REPORT_TO_HOST_FEATURE, set_and_report_grblstate(M_PROBE));
 
-  ubl.G29();
+  bedlevel.G29();
 
   TERN_(FULL_REPORT_TO_HOST_FEATURE, set_and_report_grblstate(M_IDLE));
 }

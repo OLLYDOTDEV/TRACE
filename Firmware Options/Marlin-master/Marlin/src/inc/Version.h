@@ -1,8 +1,4 @@
 /**
- * Marlin2ForPipetBot [https://github.com/DerAndere1/Marlin]
- * Copyright 2019 - 2022 DerAndere and other Marlin2ForPipetBot authors [https://github.com/DerAndere1/Marlin]
- *
- * Based on:
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
@@ -29,7 +25,7 @@
  * Release version. Leave the Marlin version or apply a custom scheme.
  */
 #ifndef SHORT_BUILD_VERSION
-  #define SHORT_BUILD_VERSION "bugfix-2.0.x"
+  #define SHORT_BUILD_VERSION "bugfix-2.1.x"
 #endif
 
 /**
@@ -46,7 +42,7 @@
  * version was tagged.
  */
 #ifndef STRING_DISTRIBUTION_DATE
-  #define STRING_DISTRIBUTION_DATE "2022-01-17"
+  #define STRING_DISTRIBUTION_DATE "2024-09-13"
 #endif
 
 /**
@@ -56,7 +52,7 @@
  * to alert users to major changes.
  */
 
-#define MARLIN_HEX_VERSION 02000903
+#define MARLIN_HEX_VERSION 02010300
 #ifndef REQUIRED_CONFIGURATION_H_VERSION
   #define REQUIRED_CONFIGURATION_H_VERSION MARLIN_HEX_VERSION
 #endif
@@ -86,7 +82,7 @@
  * providing the source code to your customers.)
  */
 #ifndef SOURCE_CODE_URL
-  #define SOURCE_CODE_URL "github.com/DerAndere1/Marlin"
+  #define SOURCE_CODE_URL "github.com/MarlinFirmware/Marlin"
 #endif
 
 /**
@@ -101,7 +97,7 @@
    * documentation about a specific Marlin release. Displayed in the Info Menu.
    */
 #ifndef WEBSITE_URL
-  #define WEBSITE_URL "github.com/DerAndere1/Marlin"
+  #define WEBSITE_URL "marlinfw.org"
 #endif
 
 /**

@@ -62,11 +62,11 @@ void GcodeSuite::M906() {
 
   #if AXIS_IS_TMC(X2) || AXIS_IS_TMC(Y2) || AXIS_IS_TMC(Z2) || AXIS_IS_TMC(Z3) || AXIS_IS_TMC(Z4)
     const int8_t index = parser.byteval('I', -1);
-  #else
+  #elif AXIS_IS_TMC(X) || AXIS_IS_TMC(Y) || AXIS_IS_TMC(Z)
     constexpr int8_t index = -1;
   #endif
 
-  LOOP_LOGICAL_AXES(i) if (uint16_t value = parser.intval(axis_codes[i])) {
+  LOOP_LOGICAL_AXES(i) if (uint16_t value = parser.intval(AXIS_CHAR(i))) {
     report = false;
     switch (i) {
       #if AXIS_IS_TMC(X) || AXIS_IS_TMC(X2)
@@ -231,6 +231,8 @@ void GcodeSuite::M906() {
 }
 
 void GcodeSuite::M906_report(const bool forReplay/*=true*/) {
+  TERN_(MARLIN_SMALL_BUILD, return);
+
   report_heading(forReplay, F(STR_STEPPER_DRIVER_CURRENT));
 
   auto say_M906 = [](const bool forReplay) {
@@ -328,7 +330,6 @@ void GcodeSuite::M906_report(const bool forReplay/*=true*/) {
     say_M906(forReplay);
     SERIAL_ECHOLNPGM(" T7 E", stepperE7.getMilliamps());
   #endif
-  SERIAL_EOL();
 }
 
 #endif // HAS_TRINAMIC_CONFIG

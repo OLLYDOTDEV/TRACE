@@ -1,8 +1,4 @@
 /**
- * Marlin2ForPipetBot [https://github.com/DerAndere1/Marlin]
- * Copyright 2019 - 2022 DerAndere and other Marlin2ForPipetBot authors [https://github.com/DerAndere1/Marlin]
- *
- * Based on:
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
@@ -63,6 +59,9 @@ class ControllerFan {
       static controllerFan_settings_t settings;
     #else
       static const controllerFan_settings_t &settings;
+    #endif
+    #if ENABLED(FAN_SOFT_PWM)
+      static uint8_t soft_pwm_speed;
     #endif
     static bool state() { return speed > 0; }
     static void init() { reset(); }

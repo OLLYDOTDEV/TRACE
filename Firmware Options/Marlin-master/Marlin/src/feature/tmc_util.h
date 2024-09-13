@@ -128,7 +128,7 @@ class TMCMarlin : public TMC, public TMCStorage<AXIS_LETTER, DRIVER_ID> {
       }
       void set_pwm_thrs(const uint32_t thrs) {
         TMC::TPWMTHRS(_tmc_thrs(this->microsteps(), thrs, planner.settings.axis_steps_per_mm[AXIS_ID]));
-        TERN_(HAS_LCD_MENU, this->stored.hybrid_thrs = thrs);
+        TERN_(HAS_MARLINUI_MENU, this->stored.hybrid_thrs = thrs);
       }
     #endif
 
@@ -137,22 +137,20 @@ class TMCMarlin : public TMC, public TMCStorage<AXIS_LETTER, DRIVER_ID> {
       void homing_threshold(int16_t sgt_val) {
         sgt_val = (int16_t)constrain(sgt_val, sgt_min, sgt_max);
         TMC::sgt(sgt_val);
-        TERN_(HAS_LCD_MENU, this->stored.homing_thrs = sgt_val);
+        TERN_(HAS_MARLINUI_MENU, this->stored.homing_thrs = sgt_val);
       }
       #if ENABLED(SPI_ENDSTOPS)
         bool test_stall_status();
       #endif
     #endif
 
-    #if HAS_LCD_MENU
-      void refresh_stepper_current() { rms_current(this->val_mA); }
+    void refresh_stepper_current() { rms_current(this->val_mA); }
 
-      #if ENABLED(HYBRID_THRESHOLD)
-        void refresh_hybrid_thrs() { set_pwm_thrs(this->stored.hybrid_thrs); }
-      #endif
-      #if USE_SENSORLESS
-        void refresh_homing_thrs() { homing_threshold(this->stored.homing_thrs); }
-      #endif
+    #if ENABLED(HYBRID_THRESHOLD)
+      void refresh_hybrid_thrs() { set_pwm_thrs(this->stored.hybrid_thrs); }
+    #endif
+    #if USE_SENSORLESS
+      void refresh_homing_thrs() { homing_threshold(this->stored.homing_thrs); }
     #endif
 
     static constexpr int8_t sgt_min = -64,
@@ -203,16 +201,14 @@ class TMCMarlin<TMC2208Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> : public TMC220
       }
       void set_pwm_thrs(const uint32_t thrs) {
         TMC2208Stepper::TPWMTHRS(_tmc_thrs(this->microsteps(), thrs, planner.settings.axis_steps_per_mm[AXIS_ID]));
-        TERN_(HAS_LCD_MENU, this->stored.hybrid_thrs = thrs);
+        TERN_(HAS_MARLINUI_MENU, this->stored.hybrid_thrs = thrs);
       }
     #endif
 
-    #if HAS_LCD_MENU
-      void refresh_stepper_current() { rms_current(this->val_mA); }
+    void refresh_stepper_current() { rms_current(this->val_mA); }
 
-      #if ENABLED(HYBRID_THRESHOLD)
-        void refresh_hybrid_thrs() { set_pwm_thrs(this->stored.hybrid_thrs); }
-      #endif
+    #if ENABLED(HYBRID_THRESHOLD)
+      void refresh_hybrid_thrs() { set_pwm_thrs(this->stored.hybrid_thrs); }
     #endif
 };
 
@@ -257,7 +253,7 @@ class TMCMarlin<TMC2209Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> : public TMC220
       }
       void set_pwm_thrs(const uint32_t thrs) {
         TMC2209Stepper::TPWMTHRS(_tmc_thrs(this->microsteps(), thrs, planner.settings.axis_steps_per_mm[AXIS_ID]));
-        TERN_(HAS_LCD_MENU, this->stored.hybrid_thrs = thrs);
+        TERN_(HAS_MARLINUI_MENU, this->stored.hybrid_thrs = thrs);
       }
     #endif
     #if USE_SENSORLESS
@@ -265,19 +261,17 @@ class TMCMarlin<TMC2209Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> : public TMC220
       void homing_threshold(int16_t sgt_val) {
         sgt_val = (int16_t)constrain(sgt_val, sgt_min, sgt_max);
         TMC2209Stepper::SGTHRS(sgt_val);
-        TERN_(HAS_LCD_MENU, this->stored.homing_thrs = sgt_val);
+        TERN_(HAS_MARLINUI_MENU, this->stored.homing_thrs = sgt_val);
       }
     #endif
 
-    #if HAS_LCD_MENU
-      void refresh_stepper_current() { rms_current(this->val_mA); }
+    void refresh_stepper_current() { rms_current(this->val_mA); }
 
-      #if ENABLED(HYBRID_THRESHOLD)
-        void refresh_hybrid_thrs() { set_pwm_thrs(this->stored.hybrid_thrs); }
-      #endif
-      #if USE_SENSORLESS
-        void refresh_homing_thrs() { homing_threshold(this->stored.homing_thrs); }
-      #endif
+    #if ENABLED(HYBRID_THRESHOLD)
+      void refresh_hybrid_thrs() { set_pwm_thrs(this->stored.hybrid_thrs); }
+    #endif
+    #if USE_SENSORLESS
+      void refresh_homing_thrs() { homing_threshold(this->stored.homing_thrs); }
     #endif
 
     static constexpr uint8_t sgt_min = 0,
@@ -311,16 +305,14 @@ class TMCMarlin<TMC2660Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> : public TMC266
       void homing_threshold(int16_t sgt_val) {
         sgt_val = (int16_t)constrain(sgt_val, sgt_min, sgt_max);
         TMC2660Stepper::sgt(sgt_val);
-        TERN_(HAS_LCD_MENU, this->stored.homing_thrs = sgt_val);
+        TERN_(HAS_MARLINUI_MENU, this->stored.homing_thrs = sgt_val);
       }
     #endif
 
-    #if HAS_LCD_MENU
-      void refresh_stepper_current() { rms_current(this->val_mA); }
+    void refresh_stepper_current() { rms_current(this->val_mA); }
 
-      #if USE_SENSORLESS
-        void refresh_homing_thrs() { homing_threshold(this->stored.homing_thrs); }
-      #endif
+    #if USE_SENSORLESS
+      void refresh_homing_thrs() { homing_threshold(this->stored.homing_thrs); }
     #endif
 
     static constexpr int8_t sgt_min = -64,
@@ -328,14 +320,14 @@ class TMCMarlin<TMC2660Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> : public TMC266
 };
 
 void monitor_tmc_drivers();
-void test_tmc_connection(LOGICAL_AXIS_DECL(const bool, true));
+void test_tmc_connection(LOGICAL_AXIS_DECL_LC(const bool, true));
 
 #if ENABLED(TMC_DEBUG)
   #if ENABLED(MONITOR_DRIVER_STATUS)
     void tmc_set_report_interval(const uint16_t update_interval);
   #endif
-  void tmc_report_all(LOGICAL_AXIS_DECL(const bool, true));
-  void tmc_get_registers(LOGICAL_AXIS_ARGS(const bool));
+  void tmc_report_all(LOGICAL_AXIS_DECL_LC(const bool, true));
+  void tmc_get_registers(LOGICAL_AXIS_ARGS_LC(const bool));
 #endif
 
 /**
@@ -348,7 +340,7 @@ void test_tmc_connection(LOGICAL_AXIS_DECL(const bool, true));
 #if USE_SENSORLESS
 
   // Track enabled status of stealthChop and only re-enable where applicable
-  struct sensorless_t { bool NUM_AXIS_ARGS(), x2, y2, z2, z3, z4; };
+  struct sensorless_t { bool NUM_AXIS_ARGS_() x2, y2, z2, z3, z4; };
 
   #if ENABLED(IMPROVE_HOMING_RELIABILITY)
     extern millis_t sg_guard_period;
@@ -378,12 +370,13 @@ void test_tmc_connection(LOGICAL_AXIS_DECL(const bool, true));
 
       return drv_status.stallGuard;
     }
+
   #endif // SPI_ENDSTOPS
 
 #endif // USE_SENSORLESS
 
+#endif // HAS_TRINAMIC_CONFIG
+
 #if HAS_TMC_SPI
   void tmc_init_cs_pins();
 #endif
-
-#endif // HAS_TRINAMIC_CONFIG
