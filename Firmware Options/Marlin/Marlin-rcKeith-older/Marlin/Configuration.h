@@ -979,7 +979,7 @@
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 1066, 1066, 1066, 1066 ,1066}
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 6400, 6400, 6400, 6400 ,6400}
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 5120, 5120, 5120, 5120 ,5120}
 
 /**
  * Default Max Feed Rate (mm/s for linear axes, °/s for rotational axes)
@@ -1460,16 +1460,16 @@
 #define Y_BED_SIZE 300
 
 // Travel limits (mm for linear axes, ° for rotational axes) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
-#define Y_MIN_POS 0
+#define X_MIN_POS -X_BED_SIZE/2
+#define Y_MIN_POS -Y_BED_SIZE/2
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE
-#define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 200
-#define I_MIN_POS 0
-#define I_MAX_POS X_BED_SIZE
-#define J_MIN_POS 0
-#define J_MAX_POS Y_BED_SIZE
+#define X_MAX_POS X_BED_SIZE/2
+#define Y_MAX_POS Y_BED_SIZE/2
+#define Z_MAX_POS 300
+#define I_MIN_POS -X_BED_SIZE/2
+#define I_MAX_POS X_BED_SIZE/2
+#define J_MIN_POS Y_BED_SIZE/2
+#define J_MAX_POS Y_BED_SIZE/2
 //#define K_MIN_POS 0
 //#define K_MAX_POS 50
 //#define U_MIN_POS 0
