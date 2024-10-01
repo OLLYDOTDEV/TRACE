@@ -202,7 +202,7 @@
 // SPI for MAX Thermocouple
 //
 #ifndef TEMP_0_CS_PIN
-  #define TEMP_0_CS_PIN                       66  // Don't use 53 if using Display/SD card (SDSS) or 49 (SD_DETECT_PIN)
+  #define TEMP_0_CS_PIN                       9 // default 66  // Don't use 53 if using Display/SD card (SDSS) or 49 (SD_DETECT_PIN)
 #endif
 
 //
@@ -212,7 +212,7 @@
   #define MOSFET_A_PIN                        10
 #endif
 #ifndef MOSFET_B_PIN
-  #define MOSFET_B_PIN                         9
+  #define MOSFET_B_PIN                        10
 #endif
 #ifndef MOSFET_C_PIN
   #define MOSFET_C_PIN                         -2 // 8
