@@ -69,7 +69,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "OLLYDOTDEV / rckeith" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "TRACE - OLLYDOTDEV" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 #define FOAMCUTTER_XYUV
 /**
@@ -510,7 +510,7 @@
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  *
  */
-#define TEMP_SENSOR_0 998 // use value -2
+#define TEMP_SENSOR_0 0 // use value -2
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
