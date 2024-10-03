@@ -772,7 +772,7 @@
 //#define DUAL_X_CARRIAGE
 #if ENABLED(DUAL_X_CARRIAGE)
   #define X1_MIN_POS X_MIN_POS    // Set to X_MIN_POS
-  #define X1_MAX_POS X_BED_SIZE   // A max coordinate so the X1 carriage can't hit the parked X2 carriage
+  #define X1_MAX_POS X_BED_SIZE   // Set to X_MAX_POS
   #define X2_MIN_POS X_MIN_POS      
   #define X2_MAX_POS X_BED_SIZE 
   #define X2_HOME_POS X2_MAX_POS  // Default X2 home position. Set to X2_MAX_POS.

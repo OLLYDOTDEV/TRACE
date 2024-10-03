@@ -208,6 +208,10 @@
   #define TEMP_BED_PIN                        14  // Analog Input
 #endif
 
+#ifndef HEATER_1_PIN
+#define HEATER_1_PIN 15
+#endif
+
 //
 // SPI for MAX Thermocouple
 //
