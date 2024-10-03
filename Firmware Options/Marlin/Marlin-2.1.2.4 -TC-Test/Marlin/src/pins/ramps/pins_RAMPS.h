@@ -212,8 +212,14 @@
 // SPI for MAX Thermocouple
 //
 #ifndef TEMP_0_CS_PIN
-  #define TEMP_0_CS_PIN                  AUX2_09  // Don't use 53 if using Display/SD card (SDSS) or 49 (SD_DETECT_PIN)
+  #define TEMP_0_CS_PIN                      9 // AUX2_09  // Don't use 53 if using Display/SD card (SDSS) or 49 (SD_DETECT_PIN)
 #endif
+
+// SPI for Bed MAX Thermocouple 
+
+#define TEMP_BED_CS_PIN    9   // CS Pin for MAX6675 or MAX31855 Thermocouple
+#define TEMP_BED_SCK_PIN   52   // SCK Pin for MAX6675 or MAX31855 Thermocouple
+#define TEMP_BED_MISO_PIN  50   // MISO Pin for MAX6675 or MAX31855 Thermocouple
 
 //
 // Heaters / Fans
@@ -491,7 +497,7 @@
 // AUX3    GND D52 D50 5V
 //          7   5   3   1
 //          8   6   4   2
-//         NC  D53 D51 D49
+//          9  D53 D51 D49 // pin 9 jumped to NC to allow themocouple
 //
 #define AUX3_02                               49
 #define AUX3_03                               50
