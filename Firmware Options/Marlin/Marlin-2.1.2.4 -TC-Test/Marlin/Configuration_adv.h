@@ -781,7 +781,7 @@
                                   // Remember to set the second extruder's X-offset to 0 in your slicer.
 
   // This is the default power-up mode which can be changed later using M605 S<mode>.
-  #define DEFAULT_DUAL_X_CARRIAGE_MODE DUPLICATION
+  #define DEFAULT_DUAL_X_CARRIAGE_MODE DXC_DUPLICATION_MODE
 
   // Default x offset in duplication mode (typically set to half print bed width)
   #define DEFAULT_DUPLICATION_X_OFFSET 100
@@ -814,7 +814,7 @@
  */
 #if HAS_X2_STEPPER && DISABLED(DUAL_X_CARRIAGE)
   //#define INVERT_X2_VS_X_DIR        // X2 direction signal is the opposite of X
-  //#define X_DUAL_ENDSTOPS           // X2 has its own endstop
+  #define X_DUAL_ENDSTOPS           // X2 has its own endstop
   #if ENABLED(X_DUAL_ENDSTOPS)
     #define X2_USE_ENDSTOP    _XMAX_  // X2 endstop board plug. Don't forget to enable USE_*_PLUG.
     #define X2_ENDSTOP_ADJUSTMENT  0  // X2 offset relative to X endstop
@@ -823,7 +823,7 @@
 
 #if HAS_DUAL_Y_STEPPERS
   //#define INVERT_Y2_VS_Y_DIR        // Y2 direction signal is the opposite of Y
-  //#define Y_DUAL_ENDSTOPS           // Y2 has its own endstop
+  #define Y_DUAL_ENDSTOPS           // Y2 has its own endstop
   #if ENABLED(Y_DUAL_ENDSTOPS)
     #define Y2_USE_ENDSTOP    _YMAX_  // Y2 endstop board plug. Don't forget to enable USE_*_PLUG.
     #define Y2_ENDSTOP_ADJUSTMENT  0  // Y2 offset relative to Y endstop
@@ -885,7 +885,7 @@
 //#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (linear=mm, rotational=°) Backoff from endstops after homing
 //#define XY_COUNTERPART_BACKOFF_MM 0         // (mm) Backoff X after homing Y, and vice-versa
 
-//#define QUICK_HOME                          // If G28 contains XY do a diagonal move first
+#define QUICK_HOME                          // If G28 contains XY do a diagonal move first
 //#define HOME_Y_BEFORE_X                     // If G28 contains XY home Y before X
 //#define HOME_Z_FIRST                        // Home Z first. Requires a real endstop (not a probe).
 //#define CODEPENDENT_XY_HOMING               // If X/Y can't home without homing Y/X first

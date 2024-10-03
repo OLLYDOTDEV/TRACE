@@ -1069,8 +1069,8 @@
 //#define USE_UMIN_PLUG
 //#define USE_VMIN_PLUG
 //#define USE_WMIN_PLUG
-//#define USE_XMAX_PLUG
-//#define USE_YMAX_PLUG
+#define USE_XMAX_PLUG
+#define USE_YMAX_PLUG
 //#define USE_ZMAX_PLUG
 //#define USE_IMAX_PLUG
 //#define USE_JMAX_PLUG
@@ -2242,16 +2242,16 @@
 //
 // Preheat Constants - Up to 10 are supported without changes
 //
-#define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 180
-#define PREHEAT_1_TEMP_BED     70
-#define PREHEAT_1_TEMP_CHAMBER 35
-#define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_1_LABEL       "Preset 1 - WHITE"
+#define PREHEAT_1_TEMP_HOTEND  0
+#define PREHEAT_1_TEMP_BED     200
+#define PREHEAT_1_TEMP_CHAMBER 0
+#define PREHEAT_1_FAN_SPEED    0 // Value from 0 to 255
 
-#define PREHEAT_2_LABEL       "ABS"
-#define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED    110
-#define PREHEAT_2_TEMP_CHAMBER 35
+#define PREHEAT_2_LABEL       "Preset 2 - BLUE"
+#define PREHEAT_2_TEMP_HOTEND   0
+#define PREHEAT_2_TEMP_BED     200
+#define PREHEAT_2_TEMP_CHAMBER  0 
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
 // @section motion
