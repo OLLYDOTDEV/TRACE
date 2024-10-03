@@ -219,6 +219,10 @@
   #define TEMP_0_CS_PIN                      9 // AUX2_09  // Don't use 53 if using Display/SD card (SDSS) or 49 (SD_DETECT_PIN)
 #endif
 
+#ifndef TEMP_1_CS_PIN
+  #define TEMP_1_CS_PIN                      9 // AUX2_09  // Don't use 53 if using Display/SD card (SDSS) or 49 (SD_DETECT_PIN)
+#endif
+
 // SPI for Bed MAX Thermocouple 
 
 #define TEMP_BED_CS_PIN    9   // CS Pin for MAX6675 or MAX31855 Thermocouple
