@@ -2242,15 +2242,17 @@
 //
 // Preheat Constants - Up to 10 are supported without changes
 //
-#define PREHEAT_1_LABEL       "Preset 1 - WHITE"
+// Temp Presets
+//
+#define PREHEAT_1_LABEL       "WHITE F"
 #define PREHEAT_1_TEMP_HOTEND  0
 #define PREHEAT_1_TEMP_BED     200
 #define PREHEAT_1_TEMP_CHAMBER 0
 #define PREHEAT_1_FAN_SPEED    0 // Value from 0 to 255
 
-#define PREHEAT_2_LABEL       "Preset 2 - BLUE"
+#define PREHEAT_2_LABEL       "BLUE F"
 #define PREHEAT_2_TEMP_HOTEND   0
-#define PREHEAT_2_TEMP_BED     200
+#define PREHEAT_2_TEMP_BED     250
 #define PREHEAT_2_TEMP_CHAMBER  0 
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
