@@ -1489,7 +1489,7 @@
  */
 
 // Min software endstops constrain movement within minimum coordinate bounds
-#define MIN_SOFTWARE_ENDSTOPS
+//#define MIN_SOFTWARE_ENDSTOPS
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
   #define MIN_SOFTWARE_ENDSTOP_X
   #define MIN_SOFTWARE_ENDSTOP_Y
