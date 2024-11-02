@@ -1943,7 +1943,7 @@
 // ADC Button Debounce
 //
 #if HAS_ADC_BUTTONS
-  #define ADC_BUTTON_DEBOUNCE_DELAY 16  // Increase if buttons bounce or repeat too fast
+  #define ADC_BUTTON_DEBOUNCE_DELAY 100  // Increase if buttons bounce or repeat too fast
 #endif
 
 // @section safety
@@ -4034,9 +4034,9 @@
  * User-defined buttons to run custom G-code.
  * Up to 25 may be defined.
  */
-//#define CUSTOM_USER_BUTTONS
+#define CUSTOM_USER_BUTTONS
 #if ENABLED(CUSTOM_USER_BUTTONS)
-  //#define BUTTON1_PIN -1
+  #define BUTTON1_PIN 11
   #if PIN_EXISTS(BUTTON1)
     #define BUTTON1_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
     #define BUTTON1_WHEN_PRINTING false     // Button allowed to trigger during printing?
@@ -4044,21 +4044,49 @@
     #define BUTTON1_DESC          "Homing"  // Optional string to set the LCD status
   #endif
 
-  //#define BUTTON2_PIN -1
+  #define BUTTON2_PIN 6
   #if PIN_EXISTS(BUTTON2)
-    #define BUTTON2_HIT_STATE     LOW
-    #define BUTTON2_WHEN_PRINTING false
-    #define BUTTON2_GCODE         "M140 S" STRINGIFY(PREHEAT_1_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_1_TEMP_HOTEND)
-    #define BUTTON2_DESC          "Preheat for " PREHEAT_1_LABEL
+    #define BUTTON2_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
+    #define BUTTON2_WHEN_PRINTING false     // Button allowed to trigger during printing?
+    #define BUTTON2_GCODE         "G28"
+    #define BUTTON2_DESC          "Homing"  // Optional string to set the LCD status
   #endif
 
-  //#define BUTTON3_PIN -1
+  #define BUTTON3_PIN 5
   #if PIN_EXISTS(BUTTON3)
-    #define BUTTON3_HIT_STATE     LOW
-    #define BUTTON3_WHEN_PRINTING false
-    #define BUTTON3_GCODE         "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
-    #define BUTTON3_DESC          "Preheat for " PREHEAT_2_LABEL
+    #define BUTTON3_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
+    #define BUTTON3_WHEN_PRINTING false     // Button allowed to trigger during printing?
+    #define BUTTON3_GCODE         "G28"
+    #define BUTTON3_DESC          "Homing"  // Optional string to set the LCD status
   #endif
+
+  #define BUTTON4_PIN 4
+  #if PIN_EXISTS(BUTTON4)
+    #define BUTTON4_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
+    #define BUTTON4_WHEN_PRINTING false     // Button allowed to trigger during printing?
+    #define BUTTON4_GCODE         "G28"
+    #define BUTTON4_DESC          "Homing"  // Optional string to set the LCD status
+  #endif
+
+
+
+  //#define BUTTON2_PIN -1
+ // #if PIN_EXISTS(BUTTON2)
+ //   #define BUTTON2_HIT_STATE     LOW
+ //   #define BUTTON2_WHEN_PRINTING false
+ //   #define BUTTON2_GCODE         "M140 S" STRINGIFY(PREHEAT_1_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_1_TEMP_HOTEND)
+ //   #define BUTTON2_DESC          "Preheat for " PREHEAT_1_LABEL
+//  #endif
+
+  //#define BUTTON3_PIN -1
+//  #if PIN_EXISTS(BUTTON3)
+//    #define BUTTON3_HIT_STATE     LOW
+//    #define BUTTON3_WHEN_PRINTING false
+//    #define BUTTON3_GCODE         "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
+//    #define BUTTON3_DESC          "Preheat for " PREHEAT_2_LABEL
+//  #endif
+
+
 #endif
 
 /**
