@@ -3572,6 +3572,7 @@
  *
  * See https://marlinfw.org/docs/configuration/laser_spindle.html for more config details.
  */
+
 #define SPINDLE_FEATURE
 //#define LASER_FEATURE
 #if EITHER(SPINDLE_FEATURE, LASER_FEATURE)
@@ -3580,7 +3581,7 @@
   #define SPINDLE_LASER_USE_PWM                // Enable if your controller supports setting the speed/power
   #if ENABLED(SPINDLE_LASER_USE_PWM)
     #define SPINDLE_LASER_PWM_INVERT    false  // Set to "true" if the speed/power goes up when you want it to go slower
-    #define SPINDLE_LASER_FREQUENCY     2500   // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
+    #define SPINDLE_LASER_FREQUENCY     5000   // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
   #endif
 
   //#define AIR_EVACUATION                     // Cutter Vacuum / Laser Blower motor control with G-codes M10-M11
@@ -3625,8 +3626,8 @@
     #define SPINDLE_CHANGE_DIR_STOP            // Enable if the spindle should stop before changing spin direction
     #define SPINDLE_INVERT_DIR          false  // Set to "true" if the spin direction is reversed
 
-    #define SPINDLE_LASER_POWERUP_DELAY   5000 // (ms) Delay to allow the spindle/laser to come up to speed/power
-    #define SPINDLE_LASER_POWERDOWN_DELAY 5000 // (ms) Delay to allow the spindle to stop
+    #define SPINDLE_LASER_POWERUP_DELAY   10000 // (ms) Delay to allow the spindle/laser to come up to speed/power
+    #define SPINDLE_LASER_POWERDOWN_DELAY 10000 // (ms) Delay to allow the spindle to stop
 
     /**
      * M3/M4 Power Equation
@@ -3727,7 +3728,7 @@
 
     #else
 
-      #define SPINDLE_LASER_POWERUP_DELAY     50 // (ms) Delay to allow the spindle/laser to come up to speed/power
+      #define SPINDLE_LASER_POWERUP_DELAY     5000 // (ms) Delay to allow the spindle/laser to come up to speed/power
       #define SPINDLE_LASER_POWERDOWN_DELAY   50 // (ms) Delay to allow the spindle to stop
 
     #endif
@@ -3858,7 +3859,7 @@
 /**
  * Auto-report position with M154 S<seconds>
  */
-//#define AUTO_REPORT_POSITION
+#define AUTO_REPORT_POSITION
 
 /**
  * Include capabilities in M115 output
@@ -4048,27 +4049,25 @@
   #if PIN_EXISTS(BUTTON2)
     #define BUTTON2_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
     #define BUTTON2_WHEN_PRINTING false     // Button allowed to trigger during printing?
-    #define BUTTON2_GCODE         "G28"
-    #define BUTTON2_DESC          "Homing"  // Optional string to set the LCD status
+    #define BUTTON2_GCODE         "M206"
+    #define BUTTON2_DESC          "Axis Zeroed"  // Optional string to set the LCD status
   #endif
 
-  #define BUTTON3_PIN 5
+  #define BUTTON3_PIN 4
   #if PIN_EXISTS(BUTTON3)
     #define BUTTON3_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
     #define BUTTON3_WHEN_PRINTING false     // Button allowed to trigger during printing?
-    #define BUTTON3_GCODE         "G28"
-    #define BUTTON3_DESC          "Homing"  // Optional string to set the LCD status
+    #define BUTTON3_GCODE         "M3 S80"
+    #define BUTTON3_DESC          "Hotwire Power 80%"  // Optional string to set the LCD status
   #endif
 
-  #define BUTTON4_PIN 4
+  #define BUTTON4_PIN 5
   #if PIN_EXISTS(BUTTON4)
     #define BUTTON4_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
     #define BUTTON4_WHEN_PRINTING false     // Button allowed to trigger during printing?
-    #define BUTTON4_GCODE         "G28"
-    #define BUTTON4_DESC          "Homing"  // Optional string to set the LCD status
+    #define BUTTON4_GCODE         "M5"
+    #define BUTTON4_DESC          "Hotwire Off"  // Optional string to set the LCD status
   #endif
-
-
 
   //#define BUTTON2_PIN -1
  // #if PIN_EXISTS(BUTTON2)
@@ -4485,3 +4484,4 @@
 
 // Report uncleaned reset reason from register r2 instead of MCUSR. Supported by Optiboot on AVR.
 //#define OPTIBOOT_RESET_REASON
+
