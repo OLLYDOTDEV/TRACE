@@ -5,8 +5,7 @@ clc;
 clear;
 
 fig = figure(1);  % Use figure identifier '1'
-set(fig, 'Position', [100, 100, 800, 600]);  % Set figure position and size
-clf;
+set(fig, 'Position', [100, 100, 800, 900]);  % Increased height to accommodate the new subplot
 
 % ------ User Parameters Editing Start ------
 Tend_Temperature_Target = 220; % C
@@ -51,6 +50,7 @@ gauges = 20:34;
 num_steps = Simulation_Duration / Simulation_Step_Size;
 T_all = zeros(length(gauges), num_steps);
 PWM_all = zeros(length(gauges), num_steps);
+T_no_PID_all = zeros(length(gauges), num_steps);
 
 % Loop through each gauge
 for g = 1:length(gauges)
@@ -92,62 +92,60 @@ for g = 1:length(gauges)
     % Initialize temperature and PWM arrays
     T = zeros(1, num_steps);
     PWM = zeros(1, num_steps);
+    T_no_PID = zeros(1, num_steps);
     T(1) = T0_Temperature;
+    T_no_PID(1) = T0_Temperature;
 
     % Simulation loop
     for i = 2:num_steps
-        % Calculate PID control
+        % PID control simulation
         error = Tend_Temperature_Target - T(i-1);
         integral = integral + error * Simulation_Step_Size;
         derivative = (error - previous_error) / Simulation_Step_Size;
         control_output = Kp * error + Ki * integral + Kd * derivative;
 
-        % Constrain the control output to be between 0 and 1 (represents duty cycle)
         duty_cycle = min(max(control_output, 0), 1);
-        PWM(i) = duty_cycle; % Store PWM signal for plotting
+        PWM(i) = duty_cycle;
 
-        % Calculate the effective power input using the duty cycle
         P_Power = P_Max_Power * duty_cycle^2;
 
-        % Energy in
+        % Energy calculations for PID-controlled simulation
         J_Energy_In = P_Power * Simulation_Step_Size;
-
-        % Energy out - Convection
         J_Energy_Convection = h * A_Surface_Area * (T(i-1) - Tamb_Temperature) * Simulation_Step_Size;
-
-        % Energy out - Radiation
         J_Energy_Radiation = emissivity * A_Surface_Area * sigma * ...
             ((T(i-1) + 273.15)^4 - (Tamb_Temperature + 273.15)^4) * Simulation_Step_Size;
-
-        % Net energy
         J_Energy_Net = J_Energy_In - J_Energy_Convection - J_Energy_Radiation;
-
-        % Temperature change
         delta_T = J_Energy_Net / (M_Mass * Cp_NiCr_Specific_Heat_Capacity);
-
-        % New temperature
         T(i) = T(i-1) + delta_T;
 
-        % Update previous error
+        % No PID control simulation
+        J_Energy_In_no_PID = P_Max_Power * Simulation_Step_Size;
+        J_Energy_Convection_no_PID = h * A_Surface_Area * (T_no_PID(i-1) - Tamb_Temperature) * Simulation_Step_Size;
+        J_Energy_Radiation_no_PID = emissivity * A_Surface_Area * sigma * ...
+            ((T_no_PID(i-1) + 273.15)^4 - (Tamb_Temperature + 273.15)^4) * Simulation_Step_Size;
+        J_Energy_Net_no_PID = J_Energy_In_no_PID - J_Energy_Convection_no_PID - J_Energy_Radiation_no_PID;
+        delta_T_no_PID = J_Energy_Net_no_PID / (M_Mass * Cp_NiCr_Specific_Heat_Capacity);
+        T_no_PID(i) = T_no_PID(i-1) + delta_T_no_PID;
+
         previous_error = error;
     end
 
     % Store results for the current gauge
     T_all(g, :) = T;
     PWM_all(g, :) = PWM;
+    T_no_PID_all(g, :) = T_no_PID;
 
-    % Display final temperature for this gauge
-    fprintf('Final wire temperature for Gauge %d: %.2f °C\n', Gauge, T(end));
+    fprintf('Final wire temperature for Gauge %d: %.2f °C (with PID), %.2f °C (without PID)\n', Gauge, T(end), T_no_PID(end));
 end
 
 % Time array for plotting
 time = 0:Simulation_Step_Size:Simulation_Duration-Simulation_Step_Size;
 
-% Plotting all temperature curves on the same graph
-figure(1);  % Use figure identifier '1'
+% Plotting
+figure(1);
 
-% Plot Temperature Over Time
-subplot(2,1,1);
+% Plot Temperature Over Time with PID Control
+subplot(3,1,1);
 hold on;
 for g = 1:length(gauges)
     plot(time, T_all(g, :), 'LineWidth', 1.5);
@@ -156,12 +154,26 @@ hold off;
 xlabel('Time (s)', 'FontSize', 12);
 ylabel('Temperature (°C)', 'FontSize', 12);
 title('Wire Temperature Over Time with PID Control', 'FontSize', 14);
-yline(Tend_Temperature_Target, '--r', 'Target Temperature'); % Add horizontal line at the target setpoint
+yline(Tend_Temperature_Target, '--r', 'Target Temperature');
+grid on;
+legend(arrayfun(@(x) sprintf('Gauge %d', x), gauges, 'UniformOutput', false), 'Location', 'southeast');
+
+% Plot Temperature Over Time without PID Control
+subplot(3,1,3);
+hold on;
+for g = 1:length(gauges)
+    plot(time, T_no_PID_all(g, :), 'LineWidth', 1.5);
+end
+hold off;
+xlabel('Time (s)', 'FontSize', 12);
+ylabel('Temperature (°C)', 'FontSize', 12);
+title('Wire Temperature Over Time without PID Control', 'FontSize', 14);
+yline(Tend_Temperature_Target, '--r', 'Target Temperature');
 grid on;
 legend(arrayfun(@(x) sprintf('Gauge %d', x), gauges, 'UniformOutput', false), 'Location', 'southeast');
 
 % Plot PWM Over Time
-subplot(2,1,2);
+subplot(3,1,2);
 hold on;
 for g = 1:length(gauges)
     plot(time, PWM_all(g, :), 'LineWidth', 1.5);
@@ -175,6 +187,4 @@ legend(arrayfun(@(x) sprintf('Gauge %d', x), gauges, 'UniformOutput', false), 'L
 
 % Adjust the layout
 sgtitle('Nichrome Wire Heating Simulation for Different Gauges', 'FontSize', 16);
-set(gcf, 'Color', 'w');  % Set background color to white
-
-
+set(gcf, 'Color', 'w');
