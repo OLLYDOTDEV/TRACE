@@ -21,11 +21,11 @@
   //  step_per_revolution = number of motor steps per revolution
   #define USER_STEP_PER_REVOLUTION        200
   #define USER_MICROSTEPS                 32
-  #define USER_PITCH_BELT                 2     // in mm
+  #define USER_PITCH_BELT                 1.5     // in mm
   #define USER_GEAR                       20    // No of Teeth
   
   ///  pitch_screw = pitch of screw
-  #define USER_PITCH_SCREW                1  // 1mm for all linear axes
+  #define USER_PITCH_SCREW                1.5  // 1mm for all linear axes
   #define USER_STEP_MM                    (USER_STEP_PER_REVOLUTION/USER_PITCH_SCREW)
   ///  ratio_table  =  the worm gear ratio
   #define USER_RATIO_TABLE                90   // for rotary axis
@@ -89,9 +89,9 @@
 #ifdef DEFAULTS_LASERCUTTER
   //  step_per_revolution = number of motor steps per revolution
   #define USER_STEP_PER_REVOLUTION        200
-  #define USER_MICROSTEPS                 16
-  #define USER_PITCH_BELT                 2     // in mm
-  #define USER_GEAR                       16    // No of Teeth
+  #define USER_MICROSTEPS                 32
+  #define USER_PITCH_BELT                 1.5     // in mm
+  #define USER_GEAR                       1    // No of Teeth
   
   ///  pitch_screw = pitch of screw
   #define USER_PITCH_SCREW                4  // 4mm for all linear axes

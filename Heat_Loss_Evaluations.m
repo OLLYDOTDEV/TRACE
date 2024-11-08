@@ -138,6 +138,21 @@ for g = 1:length(gauges)
     fprintf('Final wire temperature for Gauge %d: %.2f °C (with PID), %.2f °C (without PID)\n', Gauge, T(end), T_no_PID(end));
 end
 
+% Create a row vector of final PWM values
+final_PWM = PWM_all(:, end)';
+
+% Create a table with gauges as variable names and final PWM as a single row
+gauge_PWM_table = array2table(final_PWM, 'VariableNames', cellstr(strcat('G', string(gauges))));
+
+% Add a row name
+gauge_PWM_table.Properties.RowNames = {'Final_PWM'};
+
+% Display the table in the command window
+disp('Final PWM Duty Cycle for Each Gauge:');
+disp(gauge_PWM_table);
+
+
+
 % Time array for plotting
 time = 0:Simulation_Step_Size:Simulation_Duration-Simulation_Step_Size;
 

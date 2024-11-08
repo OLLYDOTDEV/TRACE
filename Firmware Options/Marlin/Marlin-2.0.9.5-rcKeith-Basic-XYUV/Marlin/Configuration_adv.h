@@ -3581,7 +3581,7 @@
   #define SPINDLE_LASER_USE_PWM                // Enable if your controller supports setting the speed/power
   #if ENABLED(SPINDLE_LASER_USE_PWM)
     #define SPINDLE_LASER_PWM_INVERT    false  // Set to "true" if the speed/power goes up when you want it to go slower
-    #define SPINDLE_LASER_FREQUENCY     5000   // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
+    #define SPINDLE_LASER_FREQUENCY     20000   // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
   #endif
 
   //#define AIR_EVACUATION                     // Cutter Vacuum / Laser Blower motor control with G-codes M10-M11
@@ -3728,7 +3728,7 @@
 
     #else
 
-      #define SPINDLE_LASER_POWERUP_DELAY     5000 // (ms) Delay to allow the spindle/laser to come up to speed/power
+      #define SPINDLE_LASER_POWERUP_DELAY     50 // (ms) Delay to allow the spindle/laser to come up to speed/power
       #define SPINDLE_LASER_POWERDOWN_DELAY   50 // (ms) Delay to allow the spindle to stop
 
     #endif
@@ -4035,7 +4035,7 @@
  * User-defined buttons to run custom G-code.
  * Up to 25 may be defined.
  */
-#define CUSTOM_USER_BUTTONS
+//#define CUSTOM_USER_BUTTONS
 #if ENABLED(CUSTOM_USER_BUTTONS)
   #define BUTTON1_PIN 11
   #if PIN_EXISTS(BUTTON1)
@@ -4456,7 +4456,7 @@
 //
 // M43 - display pin status, toggle pins, watch pins, watch endstops & toggle LED, test servo probe
 //
-//#define PINS_DEBUGGING
+#define PINS_DEBUGGING
 
 // Enable Marlin dev mode which adds some special commands
 //#define MARLIN_DEV_MODE
