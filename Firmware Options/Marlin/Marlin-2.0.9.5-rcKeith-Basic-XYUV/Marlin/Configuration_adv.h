@@ -847,7 +847,7 @@
 //#define SENSORLESS_BACKOFF_MM  { 2, 2, 0 }  // (mm for linear axes, ° for rotational axes) Backoff from endstops before sensorless homing
 
 #define HOMING_BUMP_MM      { 5, 5, 5, 5, 5 }       // (mm for linear axes, ° for rotational axes) Backoff from endstops after first bump
-#define HOMING_BUMP_DIVISOR { 1, 1, 1,1,1 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
+#define HOMING_BUMP_DIVISOR { 2, 2, 2, 2, 2 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 
 #define HOMING_BACKOFF_POST_MM { 0, 0, 0, 0, 0 }  // (mm for linear axes, ° for rotational axes) Backoff from endstops after homing
 
@@ -2365,9 +2365,9 @@
  * - During Hold all Emergency Parser commands are available, as usual.
  * - Enable NANODLP_Z_SYNC and NANODLP_ALL_AXIS for move command end-state reports.
  */
-//#define REALTIME_REPORTING_COMMANDS
+#define REALTIME_REPORTING_COMMANDS
 #if ENABLED(REALTIME_REPORTING_COMMANDS)
-  //#define FULL_REPORT_TO_HOST_FEATURE   // Auto-report the machine status like Grbl CNC
+  #define FULL_REPORT_TO_HOST_FEATURE   // Auto-report the machine status like Grbl CNC
 #endif
 
 // Bad Serial-connections can miss a received command by sending an 'ok'
@@ -4102,12 +4102,12 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-//#define HOST_ACTION_COMMANDS
+#define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
-  //#define HOST_PAUSE_M76
-  //#define HOST_PROMPT_SUPPORT
-  //#define HOST_START_MENU_ITEM      // Add a menu item that tells the host to start
-  //#define HOST_SHUTDOWN_MENU_ITEM   // Add a menu item that tells the host to shut down
+  #define HOST_PAUSE_M76
+  #define HOST_PROMPT_SUPPORT
+  #define HOST_START_MENU_ITEM      // Add a menu item that tells the host to start
+  #define HOST_SHUTDOWN_MENU_ITEM   // Add a menu item that tells the host to shut down
 #endif
 
 /**
@@ -4115,7 +4115,7 @@
  *
  * Implement M486 to allow Marlin to skip objects
  */
-//#define CANCEL_OBJECTS
+#define CANCEL_OBJECTS
 #if ENABLED(CANCEL_OBJECTS)
   #define CANCEL_OBJECTS_REPORTING // Emit the current object as a status message
 #endif
