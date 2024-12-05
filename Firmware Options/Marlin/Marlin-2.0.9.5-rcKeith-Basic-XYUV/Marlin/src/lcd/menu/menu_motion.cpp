@@ -53,6 +53,8 @@
   float manual_move_e_origin = 0;
 #endif
 
+
+
 //
 // "Motion" > "Move Axis" submenu
 //
@@ -90,6 +92,49 @@ static void _lcd_move_xyz(PGM_P const name, const AxisEnum axis) {
       MenuEditItemBase::draw_edit_screen(name, ui.manual_move.menu_scale >= 0.1f ? (LARGE_AREA_TEST ? ftostr51sign(pos) : ftostr41sign(pos)) : ftostr63(pos));
   }
 }
+
+
+static void _lcd_move_duel(PGM_P const name, const AxisEnum axis1, const AxisEnum axis2) {
+  if (ui.use_click()) return ui.goto_previous_screen_no_defer();
+  if (ui.encoderPosition && !ui.manual_move.processing) {
+    // Get motion limits for both axes from software endstops
+    float min1, max1, min2, max2;
+    soft_endstop.get_manual_axis_limits(axis1, min1, max1);
+    soft_endstop.get_manual_axis_limits(axis2, min2, max2);
+
+    // Get the new position
+    const float diff1 = float(int32_t(ui.encoderPosition)) * ui.manual_move.menu_scale;
+    const float diff2 = float(int32_t(ui.encoderPosition)) * ui.manual_move.menu_scale;
+    (void)ui.manual_move.apply_diff(axis1, diff1, min1, max1);
+    (void)ui.manual_move.apply_diff(axis2, diff2, min2, max2);
+    ui.manual_move.soon(axis1);
+    ui.manual_move.soon(axis2);
+    ui.refresh(LCDVIEW_REDRAW_NOW);
+   }
+
+  ui.encoderPosition = 0;
+  if (ui.should_draw()) {
+    const float pos = ui.manual_move.axis_value(axis1);
+    if (parser.using_inch_units()) {
+      const float imp_pos = LINEAR_UNIT(pos);
+      MenuEditItemBase::draw_edit_screen(name, ftostr63(imp_pos));
+    }
+    else
+      MenuEditItemBase::draw_edit_screen(name, ui.manual_move.menu_scale >= 0.1f ? (LARGE_AREA_TEST ? ftostr51sign(pos) : ftostr41sign(pos)) : ftostr63(pos));
+  }
+}
+  
+
+
+
+
+
+void lcd_move_hori() { _lcd_move_duel(GET_TEXT(MSG_MOVE_HORI), X_AXIS, I_AXIS); }
+void lcd_move_vert() { _lcd_move_duel(GET_TEXT(MSG_MOVE_VERT), Y_AXIS, J_AXIS); }
+
+
+
+
 void lcd_move_x() { _lcd_move_xyz(GET_TEXT(MSG_MOVE_X), X_AXIS); }
 #if HAS_Y_AXIS
   void lcd_move_y() { _lcd_move_xyz(GET_TEXT(MSG_MOVE_Y), Y_AXIS); }
@@ -215,6 +260,43 @@ void _menu_move_distance(const AxisEnum axis, const screenFunc_t func, const int
   END_MENU();
 }
 
+
+void _menu_move_distance_alt(const char* axis_name, const screenFunc_t func, const int8_t eindex=active_extruder) {
+  _manual_move_func_ptr = func;
+  START_MENU();
+  
+if(strcmp(axis_name, "VERT_AXIS") == 0){
+    STATIC_ITEM_P(PSTR("Vertical Slice"), SS_DEFAULT|SS_INVERT);
+}else if(strcmp(axis_name, "HORI_AXIS") == 0){
+    STATIC_ITEM_P(PSTR("Horizontal Sice"), SS_DEFAULT|SS_INVERT);
+}
+
+
+  BACK_ITEM(MSG_MOVE_AXIS);
+
+    if (LARGE_AREA_TEST) SUBMENU(MSG_MOVE_100MM, []{ _goto_manual_move(100); });
+    SUBMENU(MSG_MOVE_10MM, []{ _goto_manual_move(10);    });
+    SUBMENU(MSG_MOVE_1MM,  []{ _goto_manual_move( 1);    });
+    SUBMENU(MSG_MOVE_01MM, []{ _goto_manual_move( 0.1f); });
+  //  if (strcmp(axis_name, "Move Z") == 0 && (FINE_MANUAL_MOVE) > 0.0f && (FINE_MANUAL_MOVE) < 0.1f) {
+      constexpr uint8_t digs = !UNEAR_ZERO((FINE_MANUAL_MOVE) * 1000 - int((FINE_MANUAL_MOVE) * 1000)) ? 4 :
+                               !UNEAR_ZERO((FINE_MANUAL_MOVE) *  100 - int((FINE_MANUAL_MOVE) *  100)) ? 3 : 2;
+      PGM_P const label = GET_TEXT(MSG_MOVE_N_MM);
+      char tmp[strlen_P(label) + 10 + 1], numstr[10];
+      sprintf_P(tmp, label, dtostrf(FINE_MANUAL_MOVE, 1, digs, numstr));
+      #if DISABLED(HAS_GRAPHICAL_TFT)
+        SUBMENU_P(NUL_STR, []{ _goto_manual_move(float(FINE_MANUAL_MOVE)); });
+        MENU_ITEM_ADDON_START(0 + ENABLED(HAS_MARLINUI_HD44780));
+        lcd_put_u8str(tmp);
+        MENU_ITEM_ADDON_END();
+      #else
+        SUBMENU_P(tmp, []{ _goto_manual_move(float(FINE_MANUAL_MOVE)); });
+      #endif
+  //  }
+  
+    END_MENU();
+}
+
 #if E_MANUAL
 
   inline void _goto_menu_move_distance_e() {
@@ -247,6 +329,10 @@ void menu_move() {
   #if BOTH(HAS_SOFTWARE_ENDSTOPS, SOFT_ENDSTOPS_MENU_ITEM)
     EDIT_ITEM(bool, MSG_LCD_SOFT_ENDSTOPS, &soft_endstop._enabled);
   #endif
+
+
+SUBMENU(MSG_MOVE_HORI, []{ _menu_move_distance_alt("HORI_AXIS", lcd_move_hori); });
+SUBMENU(MSG_MOVE_VERT, []{ _menu_move_distance_alt("VERT_AXIS", lcd_move_vert); });
 
   if (NONE(IS_KINEMATIC, NO_MOTION_BEFORE_HOMING) || all_axes_homed()) {
     if (TERN1(DELTA, current_position.z <= delta_clip_start_height)) {
@@ -511,12 +597,10 @@ void menu_motion() {
     GCODES_ITEM(MSG_M48_TEST, PSTR("G28O\nM48 P10"));
   #endif
 
-  //
-  // Disable Steppers
-  //
- // #if DISABLED(FOAMCUTTER_XYUV)
+  // Disable Steppers menu item
+  // #if DISABLED(FOAMCUTTER_XYUV)
     GCODES_ITEM(MSG_DISABLE_STEPPERS, PSTR("M84"));
- // #endif
+  // #endif
   END_MENU();
 }
 

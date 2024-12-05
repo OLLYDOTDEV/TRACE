@@ -45,9 +45,12 @@
 
 #define MEDIA_TYPE_EN "Media"
 
+
+
 namespace Language_en {
   constexpr uint8_t CHARSIZE              = 2;
   LSTR LANGUAGE                           = _UxGT("English");
+
 
   // These strings should be translated
   LSTR WELCOME_MSG                        = MACHINE_NAME _UxGT(" Ready.");
@@ -293,9 +296,10 @@ namespace Language_en {
   LSTR MSG_INTENSITY_B                    = _UxGT("Blue Intensity");
   LSTR MSG_INTENSITY_W                    = _UxGT("White Intensity");
   LSTR MSG_LED_BRIGHTNESS                 = _UxGT("Brightness");
-
   LSTR MSG_MOVING                         = _UxGT("Moving...");
   LSTR MSG_FREE_XY                        = _UxGT("Free XY");
+  LSTR MSG_MOVE_VERT                      = _UxGT("Vertical Slice"); // Custom menu option
+  LSTR MSG_MOVE_HORI                      = _UxGT("Horizontal Slice"); // Custom menu option
   LSTR MSG_MOVE_X                         = _UxGT("Move X"); // Used by draw_edit_screen
   LSTR MSG_MOVE_Y                         = _UxGT("Move Y");
   LSTR MSG_MOVE_Z                         = _UxGT("Move Z");
@@ -855,3 +859,4 @@ namespace Language_en {
   #define MSG_FIRST_FAN_SPEED       MSG_FAN_SPEED_N
   #define MSG_EXTRA_FIRST_FAN_SPEED MSG_EXTRA_FAN_SPEED_N
 #endif
+
