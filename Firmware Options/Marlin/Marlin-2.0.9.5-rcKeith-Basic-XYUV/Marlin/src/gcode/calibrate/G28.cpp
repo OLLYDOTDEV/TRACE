@@ -30,6 +30,7 @@
 
 #include "../../module/stepper.h"
 #include "../../module/endstops.h"
+#include "../../module/motion.h"
 
 #if HAS_MULTI_HOTEND
   #include "../../module/tool_change.h"
@@ -117,7 +118,62 @@
     #endif
   }
 
-#endif // QUICK_HOME
+#endif // QUICK_HOME XY
+
+
+
+#if ENABLED(QUICK_HOME_XYUV)
+  static void quick_home_xyuv() {
+    // Pretend the current position is 0,0
+    current_position.set(0.0, 0.0, 0.0, 0.0,0.0);
+ //   sync_plan_position();
+
+
+        const float mlx = max_length(X_AXIS);
+        const float mly = max_length(Y_AXIS);
+
+
+    #if ENABLED(SENSORLESS_HOMING)
+      sensorless_t stealth_states {
+          NUM_AXIS_LIST(tmc_enable_stallguard(stepperX), tmc_enable_stallguard(stepperY), false, false, false, false, false, false, false)
+        , false
+          #if AXIS_HAS_STALLGUARD(X2)
+            || tmc_enable_stallguard(stepperX2)
+          #endif
+        , false
+          #if AXIS_HAS_STALLGUARD(Y2)
+            || tmc_enable_stallguard(stepperY2)
+          #endif
+      };
+    #endif
+
+//void do_blocking_move_to(NUM_AXIS_ARGS_(const_float_t) const_feedRate_t fr_mm_s=0.0f);
+const float hori_dist = 1.5 * mlx * X_HOME_DIR; // X and I(U) axis
+const float vert_dist = 1.5 * mly * Y_HOME_DIR;// Y and J(V) axis
+
+
+const float fr_mm_s = 300;
+
+//do_blocking_move_to(hori_dist,vert_dist,0,hori_dist,vert_dist,homing_feedrate(X_AXIS));
+    
+current_position.x = hori_dist;
+current_position.y = vert_dist;
+current_position.z = 0;
+current_position.i = hori_dist;
+current_position.j = vert_dist;
+planner.buffer_line(current_position,fr_mm_s);
+
+    do_blocking_move_to_xy(1.5 * mlx * X_HOME_DIR, 1.5 * mly * Y_HOME_DIR, fr_mm_s);
+
+    endstops.validate_homing_move();
+
+    current_position.set(0.0, 0.0, 0.0, 0.0, 0.0);
+
+  } 
+#endif  // QUICK_HOME XYUV
+
+
+
 
 #if ENABLED(Z_SAFE_HOMING)
 
@@ -445,6 +501,9 @@ void GcodeSuite::G28() {
     #endif
     // Diagonal move first if both are homing
     TERN_(QUICK_HOME, if (doX && doY) quick_home_xy());
+    
+    TERN_(QUICK_HOME_XYUV, if (doX && doY) quick_home_xyuv());
+
 
     // Home Y (before X)
     if (ENABLED(HOME_Y_BEFORE_X) && (doY || TERN0(CODEPENDENT_XY_HOMING, doX)))
