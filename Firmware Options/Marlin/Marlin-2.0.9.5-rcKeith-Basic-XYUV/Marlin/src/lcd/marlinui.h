@@ -370,6 +370,7 @@ public:
 
     static void abort_print();
     static void pause_print();
+    void NewFunction();
     static void resume_print();
     static void flow_fault();
 

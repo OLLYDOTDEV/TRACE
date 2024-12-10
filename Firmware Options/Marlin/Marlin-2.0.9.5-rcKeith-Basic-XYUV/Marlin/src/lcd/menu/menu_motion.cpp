@@ -272,12 +272,13 @@ if(strcmp(axis_name, "VERT_AXIS") == 0){
 }
 
 
+
     BACK_ITEM(MSG_MOVE_AXIS);
 
-    SUBMENU(MSG_MOVE_100MM, []{ _goto_manual_move(100); });
-    SUBMENU(MSG_MOVE_10MM, []{ _goto_manual_move(10);    });
-    SUBMENU(MSG_MOVE_1MM,  []{ _goto_manual_move( 1);    });
-    SUBMENU(MSG_MOVE_01MM, []{ _goto_manual_move( 0.1f); });
+    SUBMENU(MSG_MOVE_100MM, []{ _goto_manual_move(100);   });
+    SUBMENU(MSG_MOVE_10MM,  []{ _goto_manual_move(10);    });
+    SUBMENU(MSG_MOVE_1MM,   []{ _goto_manual_move( 1);    });
+    SUBMENU(MSG_MOVE_01MM,  []{ _goto_manual_move( 0.1f); });
   //  if (strcmp(axis_name, "Move Z") == 0 && (FINE_MANUAL_MOVE) > 0.0f && (FINE_MANUAL_MOVE) < 0.1f) {
       constexpr uint8_t digs = !UNEAR_ZERO((FINE_MANUAL_MOVE) * 1000 - int((FINE_MANUAL_MOVE) * 1000)) ? 4 :
                                !UNEAR_ZERO((FINE_MANUAL_MOVE) *  100 - int((FINE_MANUAL_MOVE) *  100)) ? 3 : 2;

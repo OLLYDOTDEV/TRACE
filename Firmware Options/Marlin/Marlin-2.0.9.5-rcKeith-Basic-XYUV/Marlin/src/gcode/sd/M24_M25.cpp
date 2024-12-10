@@ -92,6 +92,8 @@ void GcodeSuite::M24() {
  *   Invoke M125 to store the current position and move to the park
  *   position. M24 will move the head back before resuming the print.
  */
+
+
 void GcodeSuite::M25() {
 
   #if ENABLED(PARK_HEAD_ON_PAUSE)

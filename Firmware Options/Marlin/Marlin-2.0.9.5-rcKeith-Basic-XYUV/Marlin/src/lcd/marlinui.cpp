@@ -63,6 +63,7 @@ MarlinUI ui;
   #include "../module/printcounter.h"
 #endif
 
+
 #if LCD_HAS_WAIT_FOR_MOVE
   bool MarlinUI::wait_for_move; // = false
 #endif
@@ -1540,7 +1541,9 @@ constexpr uint8_t epps = ENCODER_PULSES_PER_STEP;
     extern bool wait_for_user, wait_for_heatup;
   #endif
 
+    
   void MarlinUI::abort_print() {
+    quickstop_stepper();
     #if ENABLED(SDSUPPORT)
       wait_for_heatup = wait_for_user = false;
       card.abortFilePrintSoon();
@@ -1570,50 +1573,60 @@ constexpr uint8_t epps = ENCODER_PULSES_PER_STEP;
   }
 
   void MarlinUI::pause_print() {
-    #if HAS_LCD_MENU
-      synchronize(GET_TEXT(MSG_PAUSING));
-      defer_status_screen();
-    #endif
 
-    TERN_(HAS_TOUCH_SLEEP, wakeup_screen());
-    TERN_(HOST_PROMPT_SUPPORT, hostui.prompt_open(PROMPT_PAUSE_RESUME, F("UI Pause"), F("Resume")));
+
+    quickpause_stepper();
+    card.pauseSDPrint();
+
+    // #if HAS_LCD_MENU
+    //   synchronize(GET_TEXT(MSG_PAUSING));
+    //   defer_status_screen();
+    // #endif
+
+    
+
+
+    // TERN_(HAS_TOUCH_SLEEP, wakeup_screen());
+    // TERN_(HOST_PROMPT_SUPPORT, hostui.prompt_open(PROMPT_PAUSE_RESUME, F("UI Pause"), F("Resume")));
 
     LCD_MESSAGE(MSG_PRINT_PAUSED);
+    print_job_timer.pause();
 
-    #if ENABLED(PARK_HEAD_ON_PAUSE)
-      pause_show_message(PAUSE_MESSAGE_PARKING, PAUSE_MODE_PAUSE_PRINT); // Show message immediately to let user know about pause in progress
-      queue.inject(F("M25 P\nM24"));
-    #elif ENABLED(SDSUPPORT)
-      queue.inject(F("M25"));
-    #elif defined(ACTION_ON_PAUSE)
-      hostui.pause();
-    #endif
+// #if ENABLED(PARK_HEAD_ON_PAUSE)
+//     pause_show_message(PAUSE_MESSAGE_PARKING, PAUSE_MODE_PAUSE_PRINT); // Show message immediately to let user know about pause in progress
+//     queue.inject(F("M25 P\nM24"));
+// #elif ENABLED(SDSUPPORT)
+//     queue.inject(F("M25"));
+// #elif defined(ACTION_ON_PAUSE)
+//    hostui.pause();
+// #endif
   }
 
   void MarlinUI::resume_print() {
+    quickresume_stepper();
     reset_status();
     TERN_(PARK_HEAD_ON_PAUSE, wait_for_heatup = wait_for_user = false);
     TERN_(SDSUPPORT, if (IS_SD_PAUSED()) queue.inject_P(M24_STR));
-    #ifdef ACTION_ON_RESUME
+#ifdef ACTION_ON_RESUME
       hostui.resume();
-    #endif
+#endif
     print_job_timer.start(); // Also called by M24
   }
 
-  #if HAS_PRINT_PROGRESS
+#if HAS_PRINT_PROGRESS
 
     MarlinUI::progress_t MarlinUI::_get_progress() {
       return (
         TERN0(LCD_SET_PROGRESS_MANUALLY, (progress_override & PROGRESS_MASK))
-        #if ENABLED(SDSUPPORT)
+#if ENABLED(SDSUPPORT)
           ?: TERN(HAS_PRINT_PROGRESS_PERMYRIAD, card.permyriadDone(), card.percentDone())
-        #endif
+#endif
       );
     }
 
-  #endif
+#endif
 
-  #if HAS_TOUCH_BUTTONS
+#if HAS_TOUCH_BUTTONS
 
     //
     // Screen Click
@@ -1642,7 +1655,7 @@ constexpr uint8_t epps = ENCODER_PULSES_PER_STEP;
         encoderDiff = epps * xdir;
     }
 
-  #endif
+#endif
 
 #elif !HAS_STATUS_MESSAGE // && !HAS_DISPLAY
 
