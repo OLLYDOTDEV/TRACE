@@ -102,14 +102,41 @@ static void _lcd_move_duel(PGM_P const name, const AxisEnum axis1, const AxisEnu
     soft_endstop.get_manual_axis_limits(axis1, min1, max1);
     soft_endstop.get_manual_axis_limits(axis2, min2, max2);
 
+
+
+
+    // // Get the new position
+    // const float diff = float(int32_t(ui.encoderPosition)) * ui.manual_move.menu_scale;
+    // (void)ui.manual_move.apply_diff(axis1, diff, min1, max1);
+    // (void)ui.manual_move.apply_diff(axis2, diff, min2, max2);
+    // ui.manual_move.soon(axis1);
+    // ui.manual_move.soon(axis2);
+    // ui.refresh(LCDVIEW_REDRAW_NOW);
+
     // Get the new position
-    const float diff1 = float(int32_t(ui.encoderPosition)) * ui.manual_move.menu_scale;
-    const float diff2 = float(int32_t(ui.encoderPosition)) * ui.manual_move.menu_scale;
-    (void)ui.manual_move.apply_diff(axis1, diff1, min1, max1);
-    (void)ui.manual_move.apply_diff(axis2, diff2, min2, max2);
+    const float diff = float(int32_t(ui.encoderPosition)) * ui.manual_move.menu_scale;
+
+    (void)ui.manual_move.apply_diff(axis1, diff, min1, max1);
+    (void)ui.manual_move.apply_diff(axis2, diff, min1, max1);  // Hack fix given J axis is not got the correct max value
     ui.manual_move.soon(axis1);
     ui.manual_move.soon(axis2);
     ui.refresh(LCDVIEW_REDRAW_NOW);
+
+// SERIAL_ECHO("Axis1 diff: "); SERIAL_ECHO(diff);
+// SERIAL_ECHO(" Axis2 diff: "); SERIAL_ECHOLN(diff);
+
+// SERIAL_ECHO("Axis1 min: "); SERIAL_ECHO(min1);
+// SERIAL_ECHO(" Axis2 min: "); SERIAL_ECHOLN(min2);
+
+// SERIAL_ECHO("Axis1 max: "); SERIAL_ECHO(max1);
+// SERIAL_ECHO(" Axis2 max: "); SERIAL_ECHOLN(max2);
+
+// SERIAL_ECHO("Axis1 Position: "); SERIAL_ECHO(ui.manual_move.axis_value(axis1));
+// SERIAL_ECHO(" Axis2 Position: "); SERIAL_ECHOLN(ui.manual_move.axis_value(axis2));
+
+
+
+
    }
 
   ui.encoderPosition = 0;
@@ -221,6 +248,8 @@ void _menu_move_distance(const AxisEnum axis, const screenFunc_t func, const int
       case X_AXIS: STATIC_ITEM(MSG_MOVE_X, SS_DEFAULT|SS_INVERT); break;
       case Y_AXIS: STATIC_ITEM(MSG_MOVE_Y, SS_DEFAULT|SS_INVERT); break;
       case Z_AXIS: STATIC_ITEM(MSG_MOVE_Z, SS_DEFAULT|SS_INVERT); break;
+      case I_AXIS: STATIC_ITEM(MSG_MOVE_I, SS_DEFAULT|SS_INVERT); break;
+      case J_AXIS: STATIC_ITEM(MSG_MOVE_J, SS_DEFAULT|SS_INVERT); break;
       default:
         TERN_(MANUAL_E_MOVES_RELATIVE, manual_move_e_origin = current_position.e);
         STATIC_ITEM(MSG_MOVE_E, SS_DEFAULT|SS_INVERT);

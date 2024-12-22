@@ -999,7 +999,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 2, 2, 2, 2, 2}
+#define DEFAULT_MAX_ACCELERATION      { 3, 3, 3, 3, 3}
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1460,16 +1460,22 @@
 #define Y_BED_SIZE 150
 
 // Travel limits (mm for linear axes, ° for rotational axes) after homing, corresponding to endstop positions.
+
 #define X_MIN_POS 0
-#define Y_MIN_POS 0
-#define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
+
+#define Y_MIN_POS 0
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 300
+
+#define Z_MIN_POS 0
+#define Z_MAX_POS 1000 
+
 #define I_MIN_POS 0
 #define I_MAX_POS X_BED_SIZE
+
 #define J_MIN_POS 0
 #define J_MAX_POS Y_BED_SIZE
+
 //#define K_MIN_POS 0
 //#define K_MAX_POS 50
 //#define U_MIN_POS 0
