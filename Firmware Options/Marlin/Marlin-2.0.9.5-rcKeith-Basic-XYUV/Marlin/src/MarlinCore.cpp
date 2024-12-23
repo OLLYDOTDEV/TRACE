@@ -507,12 +507,21 @@ inline void manage_inactivity(const bool no_stepper_sleep=false) {
     #define _CHECK_CUSTOM_USER_BUTTON(N, CODE) do{                     \
       constexpr millis_t CUB_DEBOUNCE_DELAY_##N = 250UL;               \
       static millis_t next_cub_ms_##N;                                 \
-      if (BUTTON##N##_HIT_STATE == READ(BUTTON##N##_PIN)               \
-        && (ENABLED(BUTTON##N##_WHEN_PRINTING) || printer_not_busy)) { \
+                                                                       \
+      if (BUTTON##N##_HIT_STATE == READ(BUTTON##N##_PIN) && (ENABLED(BUTTON##N##_WHEN_PRINTING) || printer_not_busy)) { \
         if (ELAPSED(ms, next_cub_ms_##N)) {                            \
           next_cub_ms_##N = ms + CUB_DEBOUNCE_DELAY_##N;               \
           CODE;                                                        \
-          queue.inject(F(BUTTON##N##_GCODE));                     \
+    switch (N) {                                                       \
+        case 2:                                                        \
+        SERIAL_ECHO("Button 4 Pushed\n");                              \
+        case 3:                                                        \
+        SERIAL_ECHO("Button 4 Pushed\n");                              \
+        case 4:                                                        \
+        SERIAL_ECHO("Button 4 Pushed\n");                              \
+        quickstop_stepper();                                           \
+    }                                                                  \
+          queue.inject(F(BUTTON##N##_GCODE));                          \
           TERN_(HAS_LCD_MENU, ui.quick_feedback());                    \
         }                                                              \
       }                                                                \

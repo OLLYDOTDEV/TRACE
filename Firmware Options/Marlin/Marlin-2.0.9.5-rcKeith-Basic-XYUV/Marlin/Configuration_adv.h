@@ -4039,7 +4039,7 @@
  * User-defined buttons to run custom G-code.
  * Up to 25 may be defined.
  */
-#define CUSTOM_USER_BUTTONS
+#define CUSTOM_USER_BUTTONS // Functions hardcoded under MarlinCore.Cpp around line 502
 #if ENABLED(CUSTOM_USER_BUTTONS)
   #define BUTTON1_PIN 11
   #if PIN_EXISTS(BUTTON1)
@@ -4069,7 +4069,7 @@
   #if PIN_EXISTS(BUTTON4)
     #define BUTTON4_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
     #define BUTTON4_WHEN_PRINTING true     // Button allowed to trigger during printing?
-    #define BUTTON4_GCODE         "M524 \n M410"
+    #define BUTTON4_GCODE         ""
     #define BUTTON4_DESC          "Que Cleared "  // Optional string to set the LCD status
   #endif
 
