@@ -4053,24 +4053,24 @@
   #if PIN_EXISTS(BUTTON2)
     #define BUTTON2_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
     #define BUTTON2_WHEN_PRINTING false     // Button allowed to trigger during printing?
-    #define BUTTON2_GCODE         "M410"
-    #define BUTTON2_DESC          "Submenu"  // Optional string to set the LCD status
+    #define BUTTON2_GCODE         "M4 S70"    // move submenu
+    #define BUTTON2_DESC          "Hotwire @ 70%"  // Optional string to set the LCD status
   #endif
 
   #define BUTTON3_PIN 5
   #if PIN_EXISTS(BUTTON3)
     #define BUTTON3_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
     #define BUTTON3_WHEN_PRINTING true     // Button allowed to trigger during printing?
-    #define BUTTON3_GCODE         "M410"
-    #define BUTTON3_DESC          "Submenu"  // Optional string to set the LCD status
+    #define BUTTON3_GCODE         "M5"   // Temp Submenu
+    #define BUTTON3_DESC          "Hotwire off"  // Optional string to set the LCD status
   #endif
 
   #define BUTTON4_PIN 4
   #if PIN_EXISTS(BUTTON4)
     #define BUTTON4_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
     #define BUTTON4_WHEN_PRINTING true     // Button allowed to trigger during printing?
-    #define BUTTON4_GCODE         ""
-    #define BUTTON4_DESC          "Que Cleared "  // Optional string to set the LCD status
+    #define BUTTON4_GCODE         "" // Function Hard Coded to C++ function for M410
+    #define BUTTON4_DESC          "Que Cleared"  // Optional string to set the LCD status
   #endif
 
 

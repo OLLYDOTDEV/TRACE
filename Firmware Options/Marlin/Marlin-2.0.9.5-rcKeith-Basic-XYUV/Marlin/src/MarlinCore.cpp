@@ -514,9 +514,9 @@ inline void manage_inactivity(const bool no_stepper_sleep=false) {
           CODE;                                                        \
     switch (N) {                                                       \
         case 2:                                                        \
-        SERIAL_ECHO("Button 4 Pushed\n");                              \
+        SERIAL_ECHO("Button 2 Pushed\n");                              \
         case 3:                                                        \
-        SERIAL_ECHO("Button 4 Pushed\n");                              \
+        SERIAL_ECHO("Button 3 Pushed\n");                              \
         case 4:                                                        \
         SERIAL_ECHO("Button 4 Pushed\n");                              \
         quickstop_stepper();                                           \
